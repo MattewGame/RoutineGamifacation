@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title> Квесты героя + Копилка</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes, viewport-fit=cover">
+  <title> Квесты героя</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 12px;
       margin: 0;
     }
 
@@ -29,9 +29,9 @@
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-radius: 64px 64px 48px 48px;
+      border-radius: 48px 48px 40px 40px;
       box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(255, 215, 150, 0.3);
-      padding: 24px 20px 30px;
+      padding: 20px 18px 28px;
       border: 3px solid rgba(255, 255, 255, 0.7);
       transition: all 0.2s ease;
       position: relative;
@@ -40,16 +40,16 @@
     /* Родительская кнопка */
     .parent-gear {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 16px;
+      right: 16px;
       background: #f3e3d5;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 26px;
       box-shadow: 0 5px 0 #b2997a, 0 4px 8px rgba(0,0,0,0.1);
       border: 2px solid white;
       cursor: pointer;
@@ -67,22 +67,25 @@
       align-items: center;
       justify-content: space-between;
       background: #ffffffc2;
-      border-radius: 120px;
-      padding: 12px 20px 12px 16px;
+      border-radius: 100px;
+      padding: 10px 18px 10px 14px;
       margin-bottom: 20px;
       box-shadow: 0 8px 0 #e3b1c8, 0 12px 20px -8px rgba(160, 100, 140, 0.2);
       border: 2px solid white;
-      margin-top: 8px;
+      margin-top: 6px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .character-area {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-shrink: 1;
     }
 
     .avatar {
-      font-size: 58px;
+      font-size: 52px;
       line-height: 1;
       filter: drop-shadow(0 8px 6px rgba(0,0,0,0.1));
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -94,7 +97,7 @@
     }
 
     .hero-text h1 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #4a2040;
       text-shadow: 3px 3px 0 #ffecb3;
@@ -103,12 +106,12 @@
     }
 
     .hero-text p {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #754a5e;
       background: #ffeaa8;
       display: inline-block;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 40px;
       margin-top: 4px;
       box-shadow: inset 0 1px 4px white, 0 3px 0 #d49b6a;
@@ -116,15 +119,17 @@
 
     .stats {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .points-box {
       background: #ffd966;
       border-radius: 60px;
-      padding: 8px 16px;
+      padding: 6px 14px;
       box-shadow: 0 5px 0 #b47c48, inset 0 2px 6px white;
       border: 2px solid #fff3cf;
       display: flex;
@@ -132,8 +137,11 @@
       gap: 6px;
     }
 
-    .points-box span {
-      font-size: 1.8rem;
+    .points-box span:first-child {
+      font-size: 1.4rem;
+    }
+    .points-box span:last-child {
+      font-size: 1.6rem;
       font-weight: 700;
       color: #3b2a1c;
     }
@@ -141,11 +149,11 @@
     .level-box {
       background: #aad6c7;
       border-radius: 40px;
-      padding: 6px 18px;
+      padding: 5px 16px;
       box-shadow: 0 4px 0 #5f8b7a, inset 0 1px 5px white;
       border: 2px solid #e6fffa;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #1e4a3d;
       display: flex;
       align-items: center;
@@ -153,7 +161,7 @@
     }
 
     .progress-wrap {
-      margin: 10px 6px 20px 6px;
+      margin: 8px 4px 20px 4px;
     }
 
     .progress-label {
@@ -162,12 +170,12 @@
       font-weight: 700;
       color: #382a47;
       padding: 0 6px 6px;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .progress-bar-bg {
       background: #eac7e0;
-      height: 24px;
+      height: 22px;
       border-radius: 60px;
       box-shadow: inset 0 4px 6px rgba(70, 30, 50, 0.15), 0 4px 0 #b48aa5;
       border: 2px solid white;
@@ -187,16 +195,16 @@
     .tab-bar {
       display: flex;
       gap: 12px;
-      margin: 8px 0 16px;
+      margin: 6px 0 16px;
     }
     .tab-btn {
       flex: 1;
       background: #fce2c1;
       border: 3px solid white;
       border-radius: 60px;
-      padding: 14px 5px;
+      padding: 12px 5px;
       font-weight: 800;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: #4a2c2a;
       box-shadow: 0 6px 0 #cb9c7a;
       cursor: pointer;
@@ -222,14 +230,14 @@
     .tasks-container {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin: 10px 0 24px;
+      gap: 14px;
+      margin: 10px 0 22px;
     }
 
     .task-card {
       background: #fefce6;
       border-radius: 50px;
-      padding: 14px 20px 14px 22px;
+      padding: 12px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -238,6 +246,7 @@
       transition: all 0.15s;
       cursor: pointer;
       transform: translateY(0);
+      gap: 12px;
     }
     .task-card:active {
       transform: translateY(4px);
@@ -255,54 +264,69 @@
     .task-left {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
+      flex: 1;
+      min-width: 0;
     }
     .task-emoji {
-      font-size: 42px;
+      font-size: 38px;
       background: #ffffffd6;
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 30px;
       box-shadow: inset 0 2px 5px #ffe0f0, 0 5px 0 #bb9baa;
       border: 2px solid white;
+      flex-shrink: 0;
+    }
+    .task-info {
+      flex: 1;
+      min-width: 0;
     }
     .task-info h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #3b1e2e;
+      word-break: break-word;
+      line-height: 1.2;
     }
     .task-reward {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       background: #ffdbb5;
-      padding: 5px 12px;
+      padding: 4px 12px;
       border-radius: 40px;
       margin-top: 5px;
       font-weight: 700;
       color: #7b4f1a;
+      font-size: 0.9rem;
+    }
+    .task-right {
+      flex-shrink: 0;
     }
     .check-badge {
       background: #a7d0b0;
       border-radius: 40px;
-      padding: 8px 18px;
+      padding: 6px 16px;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: #1c4b2d;
       box-shadow: inset 0 2px 6px white, 0 4px 0 #56855f;
       border: 2px solid #d3ffd3;
+      white-space: nowrap;
     }
     .points-badge {
       background: #fdcb6e;
       border-radius: 30px;
       padding: 6px 14px;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #3d2b0e;
       box-shadow: inset 0 1px 4px #fff3cf, 0 3px 0 #c29a4a;
+      white-space: nowrap;
     }
 
     /* Карточки целей (копилка) */
@@ -315,57 +339,71 @@
     .goal-card {
       background: #fff2d7;
       border-radius: 40px;
-      padding: 16px 22px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 8px 0 #b2967a, 0 8px 12px rgba(150,100,70,0.15);
       border: 3px solid white;
+      gap: 12px;
     }
     .goal-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 14px;
+      flex: 1;
+      min-width: 0;
     }
     .goal-emoji {
-      font-size: 44px;
+      font-size: 40px;
       background: #fff9e6;
-      border-radius: 30px;
-      width: 65px;
-      height: 65px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 30px;
       box-shadow: inset 0 2px 6px white, 0 5px 0 #b8a088;
       border: 2px solid white;
+      flex-shrink: 0;
+    }
+    .goal-info {
+      flex: 1;
+      min-width: 0;
     }
     .goal-info h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #553322;
+      word-break: break-word;
+      line-height: 1.2;
     }
     .goal-cost {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       background: #fedb9f;
-      padding: 5px 16px;
+      padding: 4px 14px;
       border-radius: 40px;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
+    }
+    .goal-right {
+      flex-shrink: 0;
     }
     .goal-right button {
       background: #7ecba1;
       border: none;
       border-radius: 60px;
-      padding: 12px 22px;
+      padding: 10px 20px;
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #1d472e;
       box-shadow: 0 5px 0 #42855e, inset 0 2px 6px #d4ffe4;
       border: 2px solid #e1ffe1;
       cursor: pointer;
       transition: 0.08s;
+      white-space: nowrap;
     }
     .goal-right button:active {
       transform: translateY(3px);
@@ -381,7 +419,8 @@
       font-weight: 700;
       padding: 8px 18px;
       border-radius: 40px;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      white-space: nowrap;
     }
 
     /* Кнопка новый день */
@@ -391,9 +430,9 @@
       background: linear-gradient(145deg, #ffb85b, #ff9533);
       border: none;
       border-radius: 60px;
-      padding: 22px 10px;
+      padding: 18px 10px;
       font-weight: 800;
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       color: #382008;
       text-shadow: 2px 2px 0 #ffe5ab;
       box-shadow: 0 12px 0 #b26500, 0 6px 15px #e09e5b;
@@ -416,13 +455,15 @@
     .modal {
       background: #fff5e6;
       border-radius: 60px;
-      padding: 28px 24px;
+      padding: 24px 22px;
       max-width: 480px;
       width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: 0 25px 40px #422c1e33, 0 10px 0 #bc9a7a;
       border: 4px solid white;
     }
-    .modal h2 { margin-bottom: 20px; color: #613d2b; }
+    .modal h2 { margin-bottom: 20px; color: #613d2b; font-size: 1.7rem; }
     .form-group {
       margin-bottom: 18px;
     }
@@ -430,16 +471,16 @@
       font-weight: 700; display: block; margin-bottom: 6px;
     }
     .form-group input {
-      width: 100%; padding: 14px 18px; border-radius: 60px;
+      width: 100%; padding: 12px 16px; border-radius: 60px;
       border: 3px solid white; background: #fef6e8;
-      font-size: 1.1rem; box-shadow: inset 0 2px 5px #ddd0c0;
+      font-size: 1rem; box-shadow: inset 0 2px 5px #ddd0c0;
     }
     .modal-actions {
       display: flex; gap: 12px; margin-top: 28px;
     }
     .modal-actions button {
-      flex: 1; padding: 14px; border-radius: 60px; font-weight: 800;
-      border: 3px solid white; cursor: pointer; font-size: 1.2rem;
+      flex: 1; padding: 12px; border-radius: 60px; font-weight: 800;
+      border: 3px solid white; cursor: pointer; font-size: 1.1rem;
     }
     .btn-primary {
       background: #fecb89; box-shadow: 0 5px 0 #cb9e5e;
@@ -460,10 +501,11 @@
     }
     .levelup-toast {
       position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);
-      background: #ffec9e; padding: 20px 40px; border-radius: 100px;
-      font-size: 2.8rem; font-weight: 900; color: #aa4e1c;
+      background: #ffec9e; padding: 18px 36px; border-radius: 100px;
+      font-size: 2.4rem; font-weight: 900; color: #aa4e1c;
       box-shadow: 0 15px 0 #bb6b2e; border: 4px solid white; z-index: 1000;
       animation: levelPop 1.5s ease-out forwards;
+      white-space: nowrap;
     }
     @keyframes levelPop {
       0% { opacity: 0; transform: translate(-50%, -30%) scale(0.5); }
@@ -471,9 +513,162 @@
       80% { opacity: 1; }
       100% { opacity: 0; transform: translate(-50%, -70%) scale(0.8); }
     }
-    @media (max-width: 480px) {
-      .app { padding: 16px 12px; }
-      .hero-text h1 { font-size: 1.3rem; }
+
+    /* 📱 МОБИЛЬНАЯ АДАПТАЦИЯ */
+    @media (max-width: 560px) {
+      body {
+        padding: 8px;
+      }
+      .app {
+        padding: 14px 12px 20px;
+        border-radius: 40px;
+      }
+      .parent-gear {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        top: 12px;
+        right: 12px;
+      }
+      .hero-header {
+        padding: 8px 12px;
+        gap: 10px;
+        justify-content: center;
+      }
+      .character-area {
+        gap: 6px;
+      }
+      .avatar {
+        font-size: 44px;
+      }
+      .hero-text h1 {
+        font-size: 1.3rem;
+      }
+      .hero-text p {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+      }
+      .points-box {
+        padding: 4px 12px;
+      }
+      .points-box span:first-child {
+        font-size: 1.2rem;
+      }
+      .points-box span:last-child {
+        font-size: 1.4rem;
+      }
+      .level-box {
+        font-size: 1rem;
+        padding: 4px 12px;
+      }
+      .tab-btn {
+        font-size: 1.1rem;
+        padding: 10px 5px;
+      }
+      .task-card {
+        padding: 10px 14px;
+        gap: 10px;
+      }
+      .task-left {
+        gap: 10px;
+      }
+      .task-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 32px;
+      }
+      .task-info h3 {
+        font-size: 1.2rem;
+      }
+      .task-reward {
+        font-size: 0.8rem;
+        padding: 3px 10px;
+      }
+      .points-badge, .check-badge {
+        font-size: 1rem;
+        padding: 5px 12px;
+        white-space: nowrap;
+      }
+      .goal-card {
+        padding: 12px 14px;
+        gap: 10px;
+      }
+      .goal-left {
+        gap: 10px;
+      }
+      .goal-emoji {
+        width: 50px;
+        height: 50px;
+        font-size: 34px;
+      }
+      .goal-info h3 {
+        font-size: 1.2rem;
+      }
+      .goal-cost {
+        font-size: 0.9rem;
+        padding: 3px 12px;
+      }
+      .goal-right button {
+        padding: 8px 16px;
+        font-size: 1rem;
+      }
+      .goal-achieved {
+        padding: 6px 14px;
+        font-size: 1rem;
+      }
+      .new-day-btn {
+        font-size: 1.4rem;
+        padding: 14px 10px;
+        box-shadow: 0 8px 0 #b26500;
+      }
+      .modal {
+        padding: 20px 16px;
+        max-height: 85vh;
+      }
+      .modal h2 {
+        font-size: 1.5rem;
+      }
+      .form-group input {
+        padding: 10px 14px;
+      }
+      .btn-primary, .btn-secondary {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .hero-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .character-area {
+        justify-content: center;
+      }
+      .task-emoji, .goal-emoji {
+        width: 44px;
+        height: 44px;
+        font-size: 28px;
+      }
+      .task-info h3, .goal-info h3 {
+        font-size: 1.1rem;
+      }
+      .points-badge, .check-badge {
+        font-size: 0.85rem;
+        padding: 4px 10px;
+      }
+      .goal-right button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      .levelup-toast {
+        font-size: 1.8rem;
+        padding: 12px 24px;
+        white-space: nowrap;
+      }
     }
   </style>
 </head>
@@ -520,7 +715,7 @@
   </div>
 </div>
 
-<!-- Модальное окно родителя (изначально скрыто) -->
+<!-- Модальное окно родителя -->
 <div id="parentModal" class="modal-overlay" style="display: none;">
   <div class="modal">
     <h2>👪 Родительский уголок</h2>
@@ -567,7 +762,6 @@
   (function(){
     "use strict";
 
-    // ---------- БАЗОВЫЕ ЗАДАНИЯ ----------
     const DEFAULT_TASKS = [
       { id: 'teeth', name: 'Почистить зубы', emoji: '🦷✨', points: 20 },
       { id: 'bed', name: 'Заправить постель', emoji: '🛏️🌟', points: 15 },
@@ -577,19 +771,13 @@
       { id: 'read', name: 'Почитать книжку', emoji: '📖🌈', points: 15 }
     ];
 
-    // ---------- ГЛОБАЛЬНОЕ СОСТОЯНИЕ ----------
     let totalPoints = 0;
-    let completedTasks = new Set();       // id выполненных заданий
+    let completedTasks = new Set();
     let currentLevel = 1;
-    
-    // Кастомные задания
     let customTasks = [];
-    // Цели (копилка)
     let goals = [];
 
     const POINTS_PER_LEVEL = 100;
-
-    // DOM элементы
     const pointsDisplay = document.getElementById('pointsDisplay');
     const levelDisplay = document.getElementById('levelDisplay');
     const xpText = document.getElementById('xpText');
@@ -598,18 +786,13 @@
     const goalsContainer = document.getElementById('goalsContainer');
     const heroAvatar = document.getElementById('heroAvatar');
     const newDayBtn = document.getElementById('newDayButton');
-    
-    // Вкладки
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tasksView = document.getElementById('tasksView');
     const goalsView = document.getElementById('goalsView');
-    
-    // Модалка родителя
     const parentModal = document.getElementById('parentModal');
     const parentGearBtn = document.getElementById('parentGearBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
-    // ---------- УТИЛИТЫ ----------
     function calcLevel(p) { return Math.floor(p / POINTS_PER_LEVEL) + 1; }
 
     function updateAvatarByLevel(level) {
@@ -643,7 +826,6 @@
       setTimeout(() => toast.remove(), 1500);
     }
 
-    // ---------- СОХРАНЕНИЕ / ЗАГРУЗКА ----------
     function saveToStorage() {
       const data = {
         totalPoints,
@@ -670,12 +852,10 @@
       updateAvatarByLevel(currentLevel);
     }
 
-    // Объединённый список заданий
     function getAllTasks() {
       return [...DEFAULT_TASKS, ...customTasks];
     }
 
-    // ---------- ОБНОВЛЕНИЕ UI (очки, прогресс) ----------
     function updateStatsUI() {
       const newLevel = calcLevel(totalPoints);
       if (newLevel > currentLevel) {
@@ -698,7 +878,6 @@
       saveToStorage();
     }
 
-    // ---------- РЕНДЕР ЗАДАНИЙ ----------
     function renderTasks() {
       const allTasks = getAllTasks();
       let html = '';
@@ -709,7 +888,7 @@
             <div class="task-left">
               <div class="task-emoji">${task.emoji}</div>
               <div class="task-info">
-                <h3>${task.name}</h3>
+                <h3>${escapeHtml(task.name)}</h3>
                 <div class="task-reward"><span>⭐</span> +${task.points}</div>
               </div>
             </div>
@@ -725,6 +904,15 @@
         if (!completedTasks.has(taskId)) {
           card.addEventListener('click', (e) => handleTaskClick(e, taskId));
         }
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
       });
     }
 
@@ -744,14 +932,13 @@
       
       updateStatsUI();
       renderTasks();
-      renderGoals(); // обновить копилку (баланс изменился)
+      renderGoals();
       
       if (completedTasks.size === getAllTasks().length) {
         setTimeout(() => { heroAvatar.textContent = '🦸‍♀️🏆'; setTimeout(() => updateAvatarByLevel(currentLevel), 1500); }, 100);
       }
     }
 
-    // ---------- РЕНДЕР ЦЕЛЕЙ (КОПИЛКА) ----------
     function renderGoals() {
       let html = '';
       goals.forEach(goal => {
@@ -761,7 +948,7 @@
             <div class="goal-left">
               <div class="goal-emoji">${goal.emoji}</div>
               <div class="goal-info">
-                <h3>${goal.name}</h3>
+                <h3>${escapeHtml(goal.name)}</h3>
                 <div class="goal-cost"><span>⭐</span> ${goal.cost}</div>
               </div>
             </div>
@@ -785,14 +972,12 @@
             bounceAvatar();
             updateStatsUI();
             renderGoals();
-            renderTasks(); // на случай, если баланс влияет на отображение (нет)
             saveToStorage();
           }
         });
       });
     }
 
-    // ---------- СБРОС ДНЯ ----------
     function resetDay() {
       completedTasks.clear();
       renderTasks();
@@ -803,7 +988,6 @@
       saveToStorage();
     }
 
-    // ---------- ДОБАВЛЕНИЕ КАСТОМНЫХ ЗАДАНИЙ И ЦЕЛЕЙ ----------
     function addCustomTask(name, emoji, points) {
       const id = 'custom_' + Date.now() + '_' + Math.random().toString(36);
       customTasks.push({ id, name, emoji: emoji || '✨', points: Number(points) });
@@ -818,7 +1002,6 @@
       saveToStorage();
     }
 
-    // ---------- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ----------
     function setActiveTab(tabId) {
       tabBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tabId);
@@ -829,15 +1012,13 @@
       } else {
         tasksView.classList.add('hidden');
         goalsView.classList.remove('hidden');
-        renderGoals(); // всегда актуально
+        renderGoals();
       }
     }
 
-    // ---------- ИНИЦИАЛИЗАЦИЯ ----------
     function init() {
       loadFromStorage();
       
-      // Если goals нет, добавим пару примеров
       if (goals.length === 0) {
         goals.push({ id: 'goal1', name: 'Новая игрушка', emoji: '🧸🎁', cost: 150, achieved: false });
         goals.push({ id: 'goal2', name: 'Поход в кино', emoji: '🎬🍿', cost: 200, achieved: false });
@@ -849,12 +1030,9 @@
       renderGoals();
       updateStatsUI();
       
-      // Обработчики
       newDayBtn.addEventListener('click', resetDay);
-      
       tabBtns.forEach(btn => btn.addEventListener('click', () => setActiveTab(btn.dataset.tab)));
       
-      // Родительская модалка
       parentGearBtn.addEventListener('click', () => parentModal.style.display = 'flex');
       closeModalBtn.addEventListener('click', () => parentModal.style.display = 'none');
       parentModal.addEventListener('click', (e) => { if (e.target === parentModal) parentModal.style.display = 'none'; });
