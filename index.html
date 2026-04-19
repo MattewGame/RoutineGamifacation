@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>Квесты героя — весёлые рутины</title>
-  <!-- Шрифт для детского настроения -->
+  <title> Квесты героя + Копилка</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -25,7 +24,7 @@
     }
 
     .app {
-      max-width: 700px;
+      max-width: 750px;
       width: 100%;
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(20px);
@@ -35,9 +34,34 @@
       padding: 24px 20px 30px;
       border: 3px solid rgba(255, 255, 255, 0.7);
       transition: all 0.2s ease;
+      position: relative;
     }
 
-    /* Шапка с героем */
+    /* Родительская кнопка */
+    .parent-gear {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f3e3d5;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 5px 0 #b2997a, 0 4px 8px rgba(0,0,0,0.1);
+      border: 2px solid white;
+      cursor: pointer;
+      transition: 0.1s;
+      z-index: 10;
+    }
+    .parent-gear:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #b2997a, 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Шапка */
     .hero-header {
       display: flex;
       align-items: center;
@@ -48,6 +72,7 @@
       margin-bottom: 20px;
       box-shadow: 0 8px 0 #e3b1c8, 0 12px 20px -8px rgba(160, 100, 140, 0.2);
       border: 2px solid white;
+      margin-top: 8px;
     }
 
     .character-area {
@@ -89,7 +114,6 @@
       box-shadow: inset 0 1px 4px white, 0 3px 0 #d49b6a;
     }
 
-    /* Блок очков и уровня */
     .stats {
       display: flex;
       flex-direction: column;
@@ -128,7 +152,6 @@
       gap: 6px;
     }
 
-    /* Прогресс бар */
     .progress-wrap {
       margin: 10px 6px 20px 6px;
     }
@@ -160,12 +183,47 @@
       transition: width 0.4s ease-out;
     }
 
-    /* Список заданий — карточки */
+    /* Переключатель вкладок */
+    .tab-bar {
+      display: flex;
+      gap: 12px;
+      margin: 8px 0 16px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: #fce2c1;
+      border: 3px solid white;
+      border-radius: 60px;
+      padding: 14px 5px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #4a2c2a;
+      box-shadow: 0 6px 0 #cb9c7a;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.1s;
+      backdrop-filter: blur(4px);
+    }
+    .tab-btn.active {
+      background: #ffe29c;
+      box-shadow: 0 4px 0 #cb9c7a;
+      transform: translateY(2px);
+    }
+
+    /* Контейнеры вкладок */
+    .view-container {
+      display: block;
+    }
+    .view-container.hidden {
+      display: none;
+    }
+
+    /* Карточки заданий */
     .tasks-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin: 28px 0 24px;
+      margin: 10px 0 24px;
     }
 
     .task-card {
@@ -181,12 +239,10 @@
       cursor: pointer;
       transform: translateY(0);
     }
-
     .task-card:active {
       transform: translateY(4px);
       box-shadow: 0 4px 0 #c29eb0, 0 8px 12px -4px rgba(120, 60, 90, 0.15);
     }
-
     .task-card.completed {
       background: #d9e0c5;
       box-shadow: 0 5px 0 #8b9a7a, 0 6px 10px rgba(0,0,0,0.05);
@@ -196,13 +252,11 @@
       cursor: default;
       pointer-events: none;
     }
-
     .task-left {
       display: flex;
       align-items: center;
       gap: 18px;
     }
-
     .task-emoji {
       font-size: 42px;
       background: #ffffffd6;
@@ -215,14 +269,11 @@
       box-shadow: inset 0 2px 5px #ffe0f0, 0 5px 0 #bb9baa;
       border: 2px solid white;
     }
-
     .task-info h3 {
       font-size: 1.5rem;
       font-weight: 700;
       color: #3b1e2e;
-      letter-spacing: -0.3px;
     }
-
     .task-reward {
       display: flex;
       align-items: center;
@@ -233,16 +284,7 @@
       margin-top: 5px;
       font-weight: 700;
       color: #7b4f1a;
-      border: 1px solid #ffeac2;
     }
-
-    .task-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
     .check-badge {
       background: #a7d0b0;
       border-radius: 40px;
@@ -253,7 +295,6 @@
       box-shadow: inset 0 2px 6px white, 0 4px 0 #56855f;
       border: 2px solid #d3ffd3;
     }
-
     .points-badge {
       background: #fdcb6e;
       border-radius: 30px;
@@ -264,6 +305,85 @@
       box-shadow: inset 0 1px 4px #fff3cf, 0 3px 0 #c29a4a;
     }
 
+    /* Карточки целей (копилка) */
+    .goals-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 20px 0 24px;
+    }
+    .goal-card {
+      background: #fff2d7;
+      border-radius: 40px;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 0 #b2967a, 0 8px 12px rgba(150,100,70,0.15);
+      border: 3px solid white;
+    }
+    .goal-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .goal-emoji {
+      font-size: 44px;
+      background: #fff9e6;
+      border-radius: 30px;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 2px 6px white, 0 5px 0 #b8a088;
+      border: 2px solid white;
+    }
+    .goal-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #553322;
+    }
+    .goal-cost {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #fedb9f;
+      padding: 5px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .goal-right button {
+      background: #7ecba1;
+      border: none;
+      border-radius: 60px;
+      padding: 12px 22px;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #1d472e;
+      box-shadow: 0 5px 0 #42855e, inset 0 2px 6px #d4ffe4;
+      border: 2px solid #e1ffe1;
+      cursor: pointer;
+      transition: 0.08s;
+    }
+    .goal-right button:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #42855e;
+    }
+    .goal-right button:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      filter: grayscale(0.3);
+    }
+    .goal-achieved {
+      background: #cfe6cf;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 1.2rem;
+    }
+
     /* Кнопка новый день */
     .new-day-btn {
       width: 100%;
@@ -272,7 +392,6 @@
       border: none;
       border-radius: 60px;
       padding: 22px 10px;
-      font-family: 'Quicksand', sans-serif;
       font-weight: 800;
       font-size: 1.9rem;
       color: #382008;
@@ -280,182 +399,219 @@
       box-shadow: 0 12px 0 #b26500, 0 6px 15px #e09e5b;
       border: 3px solid #fff1cf;
       cursor: pointer;
-      transition: 0.08s linear;
-      margin-top: 8px;
-      letter-spacing: 1px;
+      margin-top: 12px;
     }
 
-    .new-day-btn:active {
-      transform: translateY(6px);
-      box-shadow: 0 6px 0 #b26500, 0 8px 12px #d4934a;
-    }
-
-    /* Анимация всплывающих очков */
-    .float-points {
+    /* Модальное окно родителя */
+    .modal-overlay {
       position: fixed;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: #ffd966;
-      text-shadow: 3px 3px 0 #b45f06, 0 0 15px white;
-      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 999;
+    }
+    .modal {
+      background: #fff5e6;
+      border-radius: 60px;
+      padding: 28px 24px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 25px 40px #422c1e33, 0 10px 0 #bc9a7a;
+      border: 4px solid white;
+    }
+    .modal h2 { margin-bottom: 20px; color: #613d2b; }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      font-weight: 700; display: block; margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%; padding: 14px 18px; border-radius: 60px;
+      border: 3px solid white; background: #fef6e8;
+      font-size: 1.1rem; box-shadow: inset 0 2px 5px #ddd0c0;
+    }
+    .modal-actions {
+      display: flex; gap: 12px; margin-top: 28px;
+    }
+    .modal-actions button {
+      flex: 1; padding: 14px; border-radius: 60px; font-weight: 800;
+      border: 3px solid white; cursor: pointer; font-size: 1.2rem;
+    }
+    .btn-primary {
+      background: #fecb89; box-shadow: 0 5px 0 #cb9e5e;
+    }
+    .btn-secondary {
+      background: #d9c4aa; box-shadow: 0 5px 0 #a78e78;
+    }
+
+    /* Анимации */
+    .float-points {
+      position: fixed; font-size: 2.5rem; font-weight: 900; color: #ffd966;
+      text-shadow: 3px 3px 0 #b45f06; pointer-events: none; z-index: 999;
       animation: floatUp 1.2s ease-out forwards;
     }
-
     @keyframes floatUp {
       0% { opacity: 1; transform: translateY(0) scale(1); }
-      70% { opacity: 0.9; transform: translateY(-70px) scale(1.3); }
       100% { opacity: 0; transform: translateY(-120px) scale(0.8); }
     }
-
-    /* Сообщение о повышении уровня */
     .levelup-toast {
-      position: fixed;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #ffec9e;
-      padding: 20px 40px;
-      border-radius: 100px;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: #aa4e1c;
-      box-shadow: 0 15px 0 #bb6b2e, 0 20px 30px rgba(0,0,0,0.2);
-      border: 4px solid white;
-      z-index: 1000;
+      position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);
+      background: #ffec9e; padding: 20px 40px; border-radius: 100px;
+      font-size: 2.8rem; font-weight: 900; color: #aa4e1c;
+      box-shadow: 0 15px 0 #bb6b2e; border: 4px solid white; z-index: 1000;
       animation: levelPop 1.5s ease-out forwards;
-      white-space: nowrap;
     }
-
     @keyframes levelPop {
       0% { opacity: 0; transform: translate(-50%, -30%) scale(0.5); }
       20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-      40% { transform: translate(-50%, -50%) scale(1); }
       80% { opacity: 1; }
       100% { opacity: 0; transform: translate(-50%, -70%) scale(0.8); }
     }
-
-    /* Для мобильных */
     @media (max-width: 480px) {
       .app { padding: 16px 12px; }
       .hero-text h1 { font-size: 1.3rem; }
-      .avatar { font-size: 48px; }
-      .task-info h3 { font-size: 1.2rem; }
-      .task-emoji { font-size: 34px; width: 50px; height: 50px; }
-      .check-badge { font-size: 1rem; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
 <div class="app">
-  <!-- Шапка с персонажем -->
+  <!-- Кнопка родителя -->
+  <div class="parent-gear" id="parentGearBtn" title="Родительский режим">⚙️</div>
+
   <div class="hero-header">
     <div class="character-area">
       <div class="avatar" id="heroAvatar">🦸</div>
       <div class="hero-text">
-        <h1>Квесты<br>героя</h1>
+        <h1>Квесты героя</h1>
         <p>✨ делай и расти ✨</p>
       </div>
     </div>
     <div class="stats">
-      <div class="points-box">
-        <span>⭐</span>
-        <span id="pointsDisplay">0</span>
-      </div>
-      <div class="level-box">
-        <span>🎚️</span>
-        <span id="levelDisplay">1</span>
-      </div>
+      <div class="points-box"><span>⭐</span><span id="pointsDisplay">0</span></div>
+      <div class="level-box"><span>🎚️</span><span id="levelDisplay">1</span></div>
     </div>
   </div>
 
-  <!-- Прогресс до следующего уровня -->
   <div class="progress-wrap">
-    <div class="progress-label">
-      <span>🔥 опыт</span>
-      <span id="xpText">0 / 100</span>
-    </div>
-    <div class="progress-bar-bg">
-      <div class="progress-fill" id="xpProgressBar" style="width: 0%;"></div>
-    </div>
+    <div class="progress-label"><span>🔥 опыт</span><span id="xpText">0 / 100</span></div>
+    <div class="progress-bar-bg"><div class="progress-fill" id="xpProgressBar" style="width:0%"></div></div>
   </div>
 
-  <!-- Контейнер для заданий (заполняется из JS) -->
-  <div id="tasksContainer" class="tasks-container"></div>
+  <!-- Переключатель вкладок -->
+  <div class="tab-bar">
+    <div class="tab-btn active" data-tab="tasks">📋 Дела</div>
+    <div class="tab-btn" data-tab="goals">🎁 Копилка</div>
+  </div>
 
-  <!-- Кнопка сброса дня -->
-  <button class="new-day-btn" id="newDayButton">🌟 Новый день 🌟</button>
+  <!-- Вкладка Заданий -->
+  <div id="tasksView" class="view-container">
+    <div id="tasksContainer" class="tasks-container"></div>
+    <button class="new-day-btn" id="newDayButton">🌟 Новый день 🌟</button>
+  </div>
+
+  <!-- Вкладка Копилки -->
+  <div id="goalsView" class="view-container hidden">
+    <div id="goalsContainer" class="goals-container"></div>
+    <div style="text-align:center; margin-top:12px; color:#5f3e2e;">⭐ копи звёзды и получай награды!</div>
+  </div>
+</div>
+
+<!-- Модальное окно родителя (изначально скрыто) -->
+<div id="parentModal" class="modal-overlay" style="display: none;">
+  <div class="modal">
+    <h2>👪 Родительский уголок</h2>
+    <div style="margin-bottom: 20px;">
+      <h3 style="margin-bottom:12px;">➕ Новое задание</h3>
+      <div class="form-group">
+        <label>Название</label>
+        <input type="text" id="newTaskName" placeholder="Например: Полить цветы">
+      </div>
+      <div class="form-group">
+        <label>Эмодзи</label>
+        <input type="text" id="newTaskEmoji" placeholder="🌱💧" value="🌟">
+      </div>
+      <div class="form-group">
+        <label>⭐ Звёзд</label>
+        <input type="number" id="newTaskPoints" min="1" max="100" value="15">
+      </div>
+      <button id="addTaskBtn" class="btn-primary" style="width:100%;">Добавить задание</button>
+    </div>
+    <hr style="margin:20px 0; border:2px dashed #eebb99;">
+    <div>
+      <h3 style="margin-bottom:12px;">🎁 Новая цель</h3>
+      <div class="form-group">
+        <label>Название цели</label>
+        <input type="text" id="newGoalName" placeholder="Например: Поход в кино">
+      </div>
+      <div class="form-group">
+        <label>Эмодзи</label>
+        <input type="text" id="newGoalEmoji" placeholder="🎬🍿" value="🎁">
+      </div>
+      <div class="form-group">
+        <label>⭐ Стоимость</label>
+        <input type="number" id="newGoalCost" min="5" max="999" value="100">
+      </div>
+      <button id="addGoalBtn" class="btn-primary" style="width:100%;">Добавить цель</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="closeModalBtn">Закрыть</button>
+    </div>
+  </div>
 </div>
 
 <script>
   (function(){
     "use strict";
 
-    // ---------- ЯРКИЕ ДАННЫЕ: РУТИНЫ ДЛЯ РЕБЁНКА ----------
-    const TASKS = [
-      { id: 'teeth',   name: 'Почистить зубы',   emoji: '🦷✨', points: 20 },
-      { id: 'bed',     name: 'Заправить постель', emoji: '🛏️🌟', points: 15 },
-      { id: 'homework',name: 'Сделать уроки',     emoji: '📚🧠', points: 30 },
-      { id: 'toys',    name: 'Убрать игрушки',    emoji: '🧸🧹', points: 25 },
-      { id: 'help',    name: 'Помочь по дому',    emoji: '🧽🍽️', points: 20 },
-      { id: 'read',    name: 'Почитать книжку',   emoji: '📖🌈', points: 15 }
+    // ---------- БАЗОВЫЕ ЗАДАНИЯ ----------
+    const DEFAULT_TASKS = [
+      { id: 'teeth', name: 'Почистить зубы', emoji: '🦷✨', points: 20 },
+      { id: 'bed', name: 'Заправить постель', emoji: '🛏️🌟', points: 15 },
+      { id: 'homework', name: 'Сделать уроки', emoji: '📚🧠', points: 30 },
+      { id: 'toys', name: 'Убрать игрушки', emoji: '🧸🧹', points: 25 },
+      { id: 'help', name: 'Помочь по дому', emoji: '🧽🍽️', points: 20 },
+      { id: 'read', name: 'Почитать книжку', emoji: '📖🌈', points: 15 }
     ];
 
-    // ---------- СОСТОЯНИЕ ----------
-    let totalPoints = 0;              // всего звёзд
-    let completedTasks = new Set();   // id выполненных заданий (сегодня)
+    // ---------- ГЛОБАЛЬНОЕ СОСТОЯНИЕ ----------
+    let totalPoints = 0;
+    let completedTasks = new Set();       // id выполненных заданий
     let currentLevel = 1;
     
-    // Константы для уровней: каждые 100 очков = новый уровень
+    // Кастомные задания
+    let customTasks = [];
+    // Цели (копилка)
+    let goals = [];
+
     const POINTS_PER_LEVEL = 100;
 
-    // Элементы DOM
+    // DOM элементы
     const pointsDisplay = document.getElementById('pointsDisplay');
     const levelDisplay = document.getElementById('levelDisplay');
     const xpText = document.getElementById('xpText');
     const xpProgressBar = document.getElementById('xpProgressBar');
     const tasksContainer = document.getElementById('tasksContainer');
+    const goalsContainer = document.getElementById('goalsContainer');
     const heroAvatar = document.getElementById('heroAvatar');
     const newDayBtn = document.getElementById('newDayButton');
-
-    // ---------- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----------
     
-    // Вычисление текущего уровня на основе очков
-    function calcLevel(points) {
-      return Math.floor(points / POINTS_PER_LEVEL) + 1;
-    }
+    // Вкладки
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tasksView = document.getElementById('tasksView');
+    const goalsView = document.getElementById('goalsView');
+    
+    // Модалка родителя
+    const parentModal = document.getElementById('parentModal');
+    const parentGearBtn = document.getElementById('parentGearBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-    // Обновить всё, что связано с очками и прогрессом
-    function updateStatsUI() {
-      // Уровень
-      const newLevel = calcLevel(totalPoints);
-      if (newLevel > currentLevel) {
-        // Если уровень повысился — показываем спецэффект!
-        showLevelUpEffect(newLevel);
-        // Меняем аватарку на более крутую при повышении
-        updateAvatarByLevel(newLevel);
-      } else {
-        // всё равно обновляем аватар на случай загрузки
-        updateAvatarByLevel(currentLevel);
-      }
-      currentLevel = newLevel;
-      
-      // Очки
-      pointsDisplay.textContent = totalPoints;
-      levelDisplay.textContent = currentLevel;
-      
-      // Прогресс до следующего уровня
-      const pointsForCurrentLevel = (currentLevel - 1) * POINTS_PER_LEVEL;
-      const pointsIntoLevel = totalPoints - pointsForCurrentLevel;
-      const progressPercent = Math.min(100, (pointsIntoLevel / POINTS_PER_LEVEL) * 100);
-      xpProgressBar.style.width = progressPercent + '%';
-      xpText.textContent = `${pointsIntoLevel} / ${POINTS_PER_LEVEL}`;
-      
-      // Сохраняем в localStorage
-      saveToStorage();
-    }
+    // ---------- УТИЛИТЫ ----------
+    function calcLevel(p) { return Math.floor(p / POINTS_PER_LEVEL) + 1; }
 
-    // Меняем аватар в зависимости от уровня (весёлая прогрессия)
     function updateAvatarByLevel(level) {
       if (level >= 10) heroAvatar.textContent = '🦸‍♂️👑';
       else if (level >= 7) heroAvatar.textContent = '🦸‍♀️✨';
@@ -464,13 +620,11 @@
       else heroAvatar.textContent = '🦸';
     }
 
-    // Анимация подпрыгивания героя
     function bounceAvatar() {
       heroAvatar.classList.add('bounce');
       setTimeout(() => heroAvatar.classList.remove('bounce'), 200);
     }
 
-    // Эффект +очки (летящие цифры)
     function spawnFloatingPoints(amount, x, y) {
       const floatDiv = document.createElement('div');
       floatDiv.className = 'float-points';
@@ -481,7 +635,6 @@
       setTimeout(() => floatDiv.remove(), 1200);
     }
 
-    // Всплывашка "Новый уровень!"
     function showLevelUpEffect(level) {
       const toast = document.createElement('div');
       toast.className = 'levelup-toast';
@@ -490,63 +643,83 @@
       setTimeout(() => toast.remove(), 1500);
     }
 
-    // Сохранение в localStorage
+    // ---------- СОХРАНЕНИЕ / ЗАГРУЗКА ----------
     function saveToStorage() {
       const data = {
-        totalPoints: totalPoints,
+        totalPoints,
         completedTasks: Array.from(completedTasks),
-        // уровень вычисляется, не храним отдельно
+        customTasks,
+        goals
       };
-      localStorage.setItem('kidRoutineGame', JSON.stringify(data));
+      localStorage.setItem('kidRoutineGameV2', JSON.stringify(data));
     }
 
-    // Загрузка из localStorage
     function loadFromStorage() {
-      const saved = localStorage.getItem('kidRoutineGame');
+      const saved = localStorage.getItem('kidRoutineGameV2');
       if (saved) {
         try {
           const data = JSON.parse(saved);
           totalPoints = data.totalPoints || 0;
           completedTasks = new Set(data.completedTasks || []);
-        } catch(e) { /* если ошибка - начнём с чистого */ }
+          customTasks = data.customTasks || [];
+          goals = data.goals || [];
+        } catch(e) { /* сброс */ }
       }
-      // убедимся, что очки не отрицательные
       if (totalPoints < 0) totalPoints = 0;
-      // обновим аватар при загрузке
       currentLevel = calcLevel(totalPoints);
       updateAvatarByLevel(currentLevel);
     }
 
+    // Объединённый список заданий
+    function getAllTasks() {
+      return [...DEFAULT_TASKS, ...customTasks];
+    }
+
+    // ---------- ОБНОВЛЕНИЕ UI (очки, прогресс) ----------
+    function updateStatsUI() {
+      const newLevel = calcLevel(totalPoints);
+      if (newLevel > currentLevel) {
+        showLevelUpEffect(newLevel);
+        updateAvatarByLevel(newLevel);
+      } else {
+        updateAvatarByLevel(currentLevel);
+      }
+      currentLevel = newLevel;
+      
+      pointsDisplay.textContent = totalPoints;
+      levelDisplay.textContent = currentLevel;
+      
+      const pointsForLevel = (currentLevel - 1) * POINTS_PER_LEVEL;
+      const intoLevel = totalPoints - pointsForLevel;
+      const percent = Math.min(100, (intoLevel / POINTS_PER_LEVEL) * 100);
+      xpProgressBar.style.width = percent + '%';
+      xpText.textContent = `${intoLevel} / ${POINTS_PER_LEVEL}`;
+      
+      saveToStorage();
+    }
+
     // ---------- РЕНДЕР ЗАДАНИЙ ----------
     function renderTasks() {
+      const allTasks = getAllTasks();
       let html = '';
-      for (let task of TASKS) {
+      allTasks.forEach(task => {
         const isCompleted = completedTasks.has(task.id);
-        const completedClass = isCompleted ? 'completed' : '';
-        
         html += `
-          <div class="task-card ${completedClass}" data-task-id="${task.id}">
+          <div class="task-card ${isCompleted ? 'completed' : ''}" data-task-id="${task.id}">
             <div class="task-left">
               <div class="task-emoji">${task.emoji}</div>
               <div class="task-info">
                 <h3>${task.name}</h3>
-                <div class="task-reward">
-                  <span>⭐</span> <span>+${task.points}</span>
-                </div>
+                <div class="task-reward"><span>⭐</span> +${task.points}</div>
               </div>
             </div>
             <div class="task-right">
-              ${isCompleted ? 
-                '<div class="check-badge">✅ Сделано!</div>' : 
-                '<div class="points-badge">✨ жми ✨</div>'
-              }
+              ${isCompleted ? '<div class="check-badge">✅ Сделано!</div>' : '<div class="points-badge">✨ жми ✨</div>'}
             </div>
-          </div>
-        `;
-      }
+          </div>`;
+      });
       tasksContainer.innerHTML = html;
       
-      // Навешиваем обработчики на карточки (только на невыполненные)
       document.querySelectorAll('.task-card').forEach(card => {
         const taskId = card.dataset.taskId;
         if (!completedTasks.has(taskId)) {
@@ -555,95 +728,163 @@
       });
     }
 
-    // Обработка выполнения задания
     function handleTaskClick(event, taskId) {
-      const task = TASKS.find(t => t.id === taskId);
-      if (!task) return;
+      const task = getAllTasks().find(t => t.id === taskId);
+      if (!task || completedTasks.has(taskId)) return;
       
-      // Запрещаем повторное выполнение
-      if (completedTasks.has(taskId)) return;
-      
-      // Получаем координаты для анимации (относительно клика)
       const rect = event.currentTarget.getBoundingClientRect();
       const clickX = event.clientX || (rect.left + rect.width/2);
       const clickY = event.clientY || (rect.top + rect.height/2);
       
-      // Добавляем очки
       totalPoints += task.points;
-      
-      // Помечаем выполненным
       completedTasks.add(taskId);
       
-      // Эффекты: подпрыгивание героя, летящие очки
       bounceAvatar();
       spawnFloatingPoints(task.points, clickX, clickY);
       
-      // Обновляем интерфейс
       updateStatsUI();
-      renderTasks();  // перерисовка, теперь карточка станет completed
+      renderTasks();
+      renderGoals(); // обновить копилку (баланс изменился)
       
-      // Дополнительно: если все задания выполнены – маленький сюрприз (аватар радуется)
-      if (completedTasks.size === TASKS.length) {
-        setTimeout(() => {
-          heroAvatar.textContent = '🦸‍♀️🏆';
-          setTimeout(() => updateAvatarByLevel(currentLevel), 1500);
-        }, 100);
+      if (completedTasks.size === getAllTasks().length) {
+        setTimeout(() => { heroAvatar.textContent = '🦸‍♀️🏆'; setTimeout(() => updateAvatarByLevel(currentLevel), 1500); }, 100);
       }
     }
 
-    // Сброс дня: очищаем выполненные задания, но очки и уровень сохраняются
+    // ---------- РЕНДЕР ЦЕЛЕЙ (КОПИЛКА) ----------
+    function renderGoals() {
+      let html = '';
+      goals.forEach(goal => {
+        const canAfford = totalPoints >= goal.cost && !goal.achieved;
+        html += `
+          <div class="goal-card">
+            <div class="goal-left">
+              <div class="goal-emoji">${goal.emoji}</div>
+              <div class="goal-info">
+                <h3>${goal.name}</h3>
+                <div class="goal-cost"><span>⭐</span> ${goal.cost}</div>
+              </div>
+            </div>
+            <div class="goal-right">
+              ${goal.achieved ? 
+                '<span class="goal-achieved">🎉 Получено!</span>' : 
+                `<button class="buy-goal-btn" data-goal-id="${goal.id}" ${canAfford ? '' : 'disabled'}>Обменять</button>`
+              }
+            </div>
+          </div>`;
+      });
+      goalsContainer.innerHTML = html || '<div style="text-align:center;padding:30px;color:#6b4a3a;">✨ Добавь первую цель в родительском режиме ✨</div>';
+      
+      document.querySelectorAll('.buy-goal-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const goalId = btn.dataset.goalId;
+          const goal = goals.find(g => g.id === goalId);
+          if (goal && !goal.achieved && totalPoints >= goal.cost) {
+            totalPoints -= goal.cost;
+            goal.achieved = true;
+            bounceAvatar();
+            updateStatsUI();
+            renderGoals();
+            renderTasks(); // на случай, если баланс влияет на отображение (нет)
+            saveToStorage();
+          }
+        });
+      });
+    }
+
+    // ---------- СБРОС ДНЯ ----------
     function resetDay() {
-      if (completedTasks.size === 0) {
-        // если ничего не сделано, просто подмигнём герою
-        bounceAvatar();
-        return;
-      }
-      
-      // Очищаем список выполненных
       completedTasks.clear();
-      
-      // Обновляем UI
       renderTasks();
-      // Статистика (очки/уровень) не меняется, но прогресс бар остаётся
-      updateStatsUI(); 
-      
-      // Анимация "новый день"
+      updateStatsUI();
       heroAvatar.textContent = '🌞✨';
       setTimeout(() => updateAvatarByLevel(currentLevel), 600);
       bounceAvatar();
-      
-      // Сохраняем очищенное состояние
       saveToStorage();
+    }
+
+    // ---------- ДОБАВЛЕНИЕ КАСТОМНЫХ ЗАДАНИЙ И ЦЕЛЕЙ ----------
+    function addCustomTask(name, emoji, points) {
+      const id = 'custom_' + Date.now() + '_' + Math.random().toString(36);
+      customTasks.push({ id, name, emoji: emoji || '✨', points: Number(points) });
+      renderTasks();
+      saveToStorage();
+    }
+
+    function addCustomGoal(name, emoji, cost) {
+      const id = 'goal_' + Date.now() + '_' + Math.random().toString(36);
+      goals.push({ id, name, emoji: emoji || '🎯', cost: Number(cost), achieved: false });
+      renderGoals();
+      saveToStorage();
+    }
+
+    // ---------- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ----------
+    function setActiveTab(tabId) {
+      tabBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+      if (tabId === 'tasks') {
+        tasksView.classList.remove('hidden');
+        goalsView.classList.add('hidden');
+      } else {
+        tasksView.classList.add('hidden');
+        goalsView.classList.remove('hidden');
+        renderGoals(); // всегда актуально
+      }
     }
 
     // ---------- ИНИЦИАЛИЗАЦИЯ ----------
     function init() {
       loadFromStorage();
       
-      // Убедимся, что уровень соответствует очкам
+      // Если goals нет, добавим пару примеров
+      if (goals.length === 0) {
+        goals.push({ id: 'goal1', name: 'Новая игрушка', emoji: '🧸🎁', cost: 150, achieved: false });
+        goals.push({ id: 'goal2', name: 'Поход в кино', emoji: '🎬🍿', cost: 200, achieved: false });
+      }
+      
       currentLevel = calcLevel(totalPoints);
-      
-      // Рендерим задания
+      updateAvatarByLevel(currentLevel);
       renderTasks();
-      
-      // Обновляем статистику и аватар
+      renderGoals();
       updateStatsUI();
       
-      // Обработчик кнопки "Новый день"
+      // Обработчики
       newDayBtn.addEventListener('click', resetDay);
       
-      // Приветственный блеск
-      heroAvatar.style.transition = 'transform 0.2s';
+      tabBtns.forEach(btn => btn.addEventListener('click', () => setActiveTab(btn.dataset.tab)));
+      
+      // Родительская модалка
+      parentGearBtn.addEventListener('click', () => parentModal.style.display = 'flex');
+      closeModalBtn.addEventListener('click', () => parentModal.style.display = 'none');
+      parentModal.addEventListener('click', (e) => { if (e.target === parentModal) parentModal.style.display = 'none'; });
+      
+      document.getElementById('addTaskBtn').addEventListener('click', () => {
+        const name = document.getElementById('newTaskName').value.trim();
+        const emoji = document.getElementById('newTaskEmoji').value.trim() || '✨';
+        const points = parseInt(document.getElementById('newTaskPoints').value, 10);
+        if (name && points > 0) {
+          addCustomTask(name, emoji, points);
+          document.getElementById('newTaskName').value = '';
+          parentModal.style.display = 'none';
+        } else alert('Введи название и звёзды (>0)');
+      });
+      
+      document.getElementById('addGoalBtn').addEventListener('click', () => {
+        const name = document.getElementById('newGoalName').value.trim();
+        const emoji = document.getElementById('newGoalEmoji').value.trim() || '🎁';
+        const cost = parseInt(document.getElementById('newGoalCost').value, 10);
+        if (name && cost > 0) {
+          addCustomGoal(name, emoji, cost);
+          document.getElementById('newGoalName').value = '';
+          parentModal.style.display = 'none';
+        } else alert('Введи название и стоимость');
+      });
+      
+      setActiveTab('tasks');
     }
 
-    // Запуск
     init();
-
-    // (Опционально) Сохраняем при закрытии вкладки (уже сохраняется при изменениях)
-    window.addEventListener('beforeunload', function() {
-      saveToStorage();
-    });
-
   })();
 </script>
 </body>
